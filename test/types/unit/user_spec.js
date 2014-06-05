@@ -12,7 +12,7 @@ var db = traceur.require(__dirname + '/../../helpers/db.js');
 var factory = traceur.require(__dirname + '/../../helpers/factory.js');
 
 var User;
-var sue;
+// var sue;
 
 describe('User', function(){
   before(function(done){
@@ -83,6 +83,14 @@ describe('User', function(){
 
     it('should NOT successfully find a user', function(done){
       User.findById('not an id', function(u){
+        expect(u).to.be.null;
+        done();
+      });
+    });
+
+    it('should NOT successfully find from a null id', function(done)
+    {
+      User.findById(null, function(u){
         expect(u).to.be.null;
         done();
       });

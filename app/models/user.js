@@ -1,17 +1,23 @@
 var bcrypt = require('bcrypt');
 var userCollection = global.nss.db.collection('users');
 var Mongo = require('mongodb');
-var _ = require('lodash');
+// var _ = require('lodash');
+var traceur = require('traceur');
+var Base = traceur.require(__dirname + '/base.js');
 
 class User{
+  constructor(obj)
+  {
+    this._id = Mongo.ObjectID(obj._id);
+    this.email = obj.email;
+    this.password = bcrypt.hashSync(obj.password, 8);
+  }
+
   static create(obj, fn){
-    userCollection.findOne({email:obj.email}, (e,u)=>{
+    userCollection.findOne({email:obj.email}, (e,u)=>
+    {
       if(!u){
-        var user = new User();
-        user._id = Mongo.ObjectID(obj._id);
-        user.email = obj.email;
-        user.password = bcrypt.hashSync(obj.password, 8);
-        userCollection.save(user, ()=>fn(user));
+        Base.create(obj, userCollection, User, fn);
       }else{
         fn(null);
       }
@@ -33,18 +39,14 @@ class User{
     });
   }
 
-  static findById(id, fn){
-    if(id.length !== 24){fn(null); return;}
+  static findById(id, fn)
+  {
+    Base.findById(id, userCollection, User, fn);
+  }
 
-    id = Mongo.ObjectID(id);
-    userCollection.findOne({_id:id}, (e,u)=>{
-      if(u){
-        u = _.create(User.prototype, u);
-        fn(u);
-      }else{
-        fn(null);
-      }
-    });
+  static findAll(fn)
+  {
+    Base.findAll(userCollection, User, fn);
   }
 }
 

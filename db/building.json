@@ -1,0 +1,7 @@
+[
+  {"name":"White House", "x":20, "y":30, "locationId":"5390cb82f243b6bd33748b3c", "userId":"0123456789abcdef01234568"},
+  {"name":"Green House", "x":25, "y":35, "locationId":"5390cb82f243b6bd33748b3c", "userId":"0123456789abcdef01234568"},
+  {"name":"Taj Mahal", "x":30, "y":40, "locationId":"5390cb82f243b6bd33748b3c", "userId":"0123456789abcdef01234568"},
+  {"name":"Castle", "x":35, "y":45, "locationId":"5390cb82f243b6bd33748b3c", "userId":"0123456789abcdef01234568"},
+  {"name":"Mansion", "x":40, "y":50, "locationId":"5390cb82f243b6bd33748b3c", "userId":"0123456789abcdef01234568"}
+]
